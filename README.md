@@ -15,7 +15,7 @@ This is simple example of creating MVC framework with php.
 - public (Contains the front controller and assets (images, JavaScript, CSS, etc)
 - src (All core classes)
 
-## DAtabase
+## DAatabase
 
 ![alt tag](https://raw.githubusercontent.com/andrejrs/php-mvc-example/master/screenshots/db.png)
 
