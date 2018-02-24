@@ -1,0 +1,25 @@
+<?php
+
+if (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) {
+    die('cli only!');
+}
+
+// Define path to application directory
+define('APPLICATION_PATH', realpath(dirname(__FILE__)));
+
+if (count($argv) < 2) {
+    die("You need to specify seeder name!\n");
+}
+
+// Make seeder class string
+$name = "\Seeder\\" . $argv[1] . "Seeder";
+
+require './src/Psr4AutoloaderClass.php';
+
+// PSR4 autoloader class.
+$loader = new Core\Psr4AutoloaderClass();
+$loader->register();
+
+// Run seeder
+$t = new $name();
+$t->run();
