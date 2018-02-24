@@ -15,7 +15,7 @@ This is simple example of creating MVC framework with php.
 - public (Contains the front controller and assets (images, JavaScript, CSS, etc)
 - src (All core classes)
 
-## DAatabase
+## Daatabase
 
 ![alt tag](https://raw.githubusercontent.com/andrejrs/php-mvc-example/master/screenshots/db.png)
 
@@ -46,7 +46,7 @@ To start this project, you need to have the following components installed:
 
 ### Installing
 
-Transfer files to the folder that watches the web server and import the database.
+Transfer files to the folder that watches the web server and import database.
 The configuration parameters for the database are in /Config/Database.php.
 
 ## Database Seeding
