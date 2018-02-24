@@ -79,7 +79,7 @@ These files are automatically loaded by the framework.
 
 ### Routes
 
-One method can have multiple routes. The routes consist of request method and array with url and controller@action. 
+One method can have multiple routes. The routes consist of request method and array with URI and controller@action. 
 
 ```
 return [
