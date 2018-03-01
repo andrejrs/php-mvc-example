@@ -118,7 +118,7 @@ Code:
 * Model $_table moved to constructor.
 * Using array_keys() and array_values() instead of foreach in Model insert() method.
 * Added new Validator class with date validation method.
-* Added date validation in Home controller.
+* Added date validation in Statistic model.
 * Added default option in Request::getParam.
 * Added type hinting.
 
