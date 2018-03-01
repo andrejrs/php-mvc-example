@@ -20,12 +20,16 @@ use Core\Model;
 class Customer extends Model {
 
     /**
-     * The database table name.
-     * [Variable from the Model class\
+     * The model construct
      *
-     * @var string
      */
-    protected $_table = "customers";
+    public function __construct() {
+
+        /**
+         * The database table name.
+         */
+        parent::__construct("customers");
+    }
 
     /**
      * Method getting all records from database.
@@ -35,7 +39,7 @@ class Customer extends Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getAll() {
+    public function getAll(): iterable {
 
         return $this->DB()
                         ->query('SELECT id, first_name FROM customers')

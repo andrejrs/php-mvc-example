@@ -32,11 +32,12 @@ class Request {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public static function getParam($name) {
+    public static function getParam(string $name, string $default = NULL): ?string {
         if (isset(Request::$params[$name])) {
             return Request::$params[$name];
+        } else {
+            return $default;
         }
-        return null;
     }
 
     /**
@@ -46,7 +47,7 @@ class Request {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public static function setParams($params) {
+    public static function setParams(array $params): void {
         Request::$params = $params;
     }
 

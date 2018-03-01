@@ -4,6 +4,8 @@ namespace Core;
 
 use Core\Error;
 use Config\Application as AppConfig;
+use Exception;
+use Error as PHPError;
 
 /**
  * Error class
@@ -35,7 +37,7 @@ class Error {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public static function errorHandler($level, $message, $file, $line) {
+    public static function errorHandler(int $level, string $message, string $file, int $line): void {
 
         if (error_reporting() !== 0) {
             throw new \ErrorException($message, 0, $level, $file, $line);
@@ -53,7 +55,7 @@ class Error {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public static function exceptionHandler($exception) {
+    public static function exceptionHandler($exception): void {
 
         // Variables
         $errorinfo = "";
@@ -89,7 +91,7 @@ class Error {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public static function logToFile($exception) {
+    public static function logToFile(Exception $exception): void {
 
         // Set log path
         ini_set('error_log', APPLICATION_PATH . '/logs/' . date('Y-m-d') . '.txt');
@@ -113,7 +115,7 @@ class Error {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public static function getErrorInfo($exception) {
+    public static function getErrorInfo($exception): string {
 
         $errorinfo = "";
         $errorinfo .= "<h1>Fatal error</h1>";

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\Controller;
 use Core\Request;
 use Core\View;
+use Core\Validator;
 
 /**
  * The home controller class.
@@ -33,22 +34,12 @@ class Home extends Controller {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function index() {
+    public function index(): void {
 
         // Request params
-        $test = Request::getParam("test");
-        $from = Request::getParam("from");
-        $to = Request::getParam("to");
-        $month = Request::getParam("month");
-
-        // Filters
-        if ($from == NULL && $to === NULL) {
-            $from = date("Y-m-01");
-            $to = date("Y-m-t");
-        }
-        if ($month === NULL) {
-            $month = date("Y-m");
-        }
+        $from = Request::getParam("from", date("Y-m-01"));
+        $to = Request::getParam("to", date("Y-m-t"));
+        $month = Request::getParam("month", date("Y-m"));
 
         // Statistic counters
         $modelStatistic = new \App\Models\Statistic();
@@ -69,7 +60,7 @@ class Home extends Controller {
 
         // Render view
         View::render("home", compact(
-            ["test", "from", "to", "statistic", "graphic", "month", "orders"]
+                        ["test", "from", "to", "statistic", "graphic", "month", "orders"]
         ));
     }
 

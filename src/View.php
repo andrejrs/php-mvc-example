@@ -29,7 +29,7 @@ class View {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    static function render($view, $params) {
+    static function render(string $view, array $params): void {
 
         // Extract controller variables
         extract($params, EXTR_SKIP);
@@ -59,7 +59,7 @@ class View {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    static function renderError($params) {
+    static function renderError(array $params): void {
 
         // Extract controller variables
         extract($params, EXTR_SKIP);

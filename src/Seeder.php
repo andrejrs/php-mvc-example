@@ -27,5 +27,5 @@ interface Seeder {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function run();
+    public function run(): void;
 }

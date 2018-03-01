@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Core\Model;
+use Core\Validator;
 
 /**
  * The statistic class.
@@ -20,6 +21,14 @@ use Core\Model;
 class Statistic extends Model {
 
     /**
+     * The model construct
+     *
+     */
+    public function __construct() {
+        parent::__construct("");
+    }
+
+    /**
      * Database statistics.
      *
      * The method returns from the database statistics for the dashboard for a given period.
@@ -32,9 +41,10 @@ class Statistic extends Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getForDashboard($from = NULL, $to = NULL) {
+    public function getForDashboard(string $from = NULL, string $to = NULL): iterable {
 
-        if ($from == NULL && $to === NULL) {
+        if (Validator::dates(compact(["from", "to"])) === false) {
+
             $from = date("Y-m-01");
             $to = date("Y-m-t");
         }
@@ -63,7 +73,12 @@ class Statistic extends Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getMountlyGraphicData($year_month) {
+    public function getMountlyGraphicData(string $year_month = NULL): iterable {
+
+        if (Validator::dates(compact("year_month"), "Y-m") === false) {
+            
+            $year_month = date("Y-m");
+        }
 
         $rows = $this->DB()
                 ->query('SELECT '
@@ -106,7 +121,7 @@ class Statistic extends Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getAll() {
+    public function getAll(): iterable {
         
     }
 

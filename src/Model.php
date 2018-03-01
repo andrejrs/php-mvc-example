@@ -3,6 +3,7 @@
 namespace Core;
 
 use Config\Database;
+use PDO;
 
 /**
  * The abstract model class.
@@ -24,26 +25,32 @@ abstract class Model {
      *
      * @var object
      */
-    private $db = null;
+    static $db = null;
 
     /**
      * The name of the table in the database that the model binds
      *
      * @var string
      */
-    protected $_table;
+    private $_table;
 
     /**
      * The model construct
      *
      */
-    public function __construct() {
+    public function __construct($table_name) {
 
-        $conn_string = 'mysql:host=' . Database::DB_HOST . ';dbname=' . Database::DB_NAME . ';charset=utf8';
-        $this->db = new \PDO($conn_string, Database::DB_USER, Database::DB_PASSWORD);
+        if (static::$db === null) {
+            
+            $conn_string = 'mysql:host=' . Database::DB_HOST . ';dbname=' . Database::DB_NAME . ';charset=utf8';
+            $db = new \PDO($conn_string, Database::DB_USER, Database::DB_PASSWORD);
+
+            // Throw an Exception when an error occurs
+            $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            static::$db = $db;
+        }
         
-        // Throw an Exception when an error occurs
-        $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $this->_table = $table_name;
     }
 
     /**
@@ -54,7 +61,7 @@ abstract class Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    abstract function getAll();
+    abstract function getAll(): iterable;
 
     /**
      * The insert method.
@@ -71,27 +78,25 @@ abstract class Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function insert($data) {
+    public function insert(array $data): int {
 
-        // Fields to be added.
-        $fields = [];
-        // Fields values
-        $values = [];
-        // Question marks
-        $marks = array_fill(0, count($data), '?');
-
-        // Separate the field name from the value.
-        foreach ($data as $field => $value) {
-            $fields[] = $field;
-            $values[] = $value;
+        if($this->_table === ""){
+            throw new Exception("Attribute _table is empty string!");
         }
         
+        // Question marks
+        $marks = array_fill(0, count($data), '?');
+        // Fields to be added.
+        $fields = array_keys($data);
+        // Fields values
+        $values = array_values($data);
+
         // Prepare statement
         $stmt = $this->DB()->prepare("
             INSERT INTO " . $this->_table . "(" . implode(",", $fields) . ")
             VALUES(" . implode(",", $marks) . ")
         ");
-        
+
         // Execute statement with values
         $stmt->execute($values);
 
@@ -106,8 +111,9 @@ abstract class Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    protected function DB() {
-        return $this->db;
+    protected function DB(): PDO {
+
+        return static::$db;
     }
 
 }

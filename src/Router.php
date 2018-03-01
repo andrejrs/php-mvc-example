@@ -64,7 +64,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function decodeControler($route) {
+    private function decodeControler(string $route): iterable {
 
         $con = explode("@", $route);
 
@@ -87,7 +87,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function checkRoute($url, $method) {
+    private function checkRoute(string $url, string $method): ?iterable {
 
         foreach ($this->routes[$method] as $route_path => $route) {
 
@@ -100,7 +100,7 @@ class Router {
                 return $route;
             }
         }
-        return false;
+        return NULL;
     }
 
     /**
@@ -112,7 +112,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function methodCallable($controller_object) {
+    private function methodCallable(Controller $controller_object): void {
 
         if (is_callable(array($controller_object, $this->route['action']))) {
             $action = $this->route['action'];
@@ -131,7 +131,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function methodExists($controller_object) {
+    private function methodExists(Controller $controller_object): void {
 
         if (method_exists($controller_object, $this->route['action'])) {
             $this->methodCallable($controller_object);
@@ -147,7 +147,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function runRoute() {
+    private function runRoute(): void {
 
         // Check if class exists
         if (class_exists($this->route['controller'])) {
@@ -170,7 +170,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function dispatch() {
+    public function dispatch(): void {
 
         // Get the url.
         $url = $_SERVER['PHP_SELF'];
@@ -186,7 +186,7 @@ class Router {
         // Validate route
         $this->route = $this->checkRoute($url, $method);
 
-        if ($this->route === false) {
+        if ($this->route === NULL) {
             throw new \Exception('No route matched.', 404);
         }
 
@@ -204,7 +204,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getRoutes() {
+    public function getRoutes(): iterable {
         return $this->routes;
     }
 
@@ -217,7 +217,7 @@ class Router {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function extractUrlParams($url) {
+    public function extractUrlParams(string $url): void {
 
         // Route string
         $params_string = str_replace($this->routePath, "", $url);

@@ -27,14 +27,14 @@ class Database {
      * 
      * @var string
      */
-    const DB_NAME = '';
+    const DB_NAME = 'psr4';
 
     /**
      * Database username
      * 
      * @var string
      */
-    const DB_USER = '';
+    const DB_USER = 'root';
 
     /**
      * Database password

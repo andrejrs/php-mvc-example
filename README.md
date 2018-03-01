@@ -57,7 +57,7 @@ Seeders can be defined in a /database directory. Seeder needs to implement the c
 
 You can run the seeder by calling the php seeder command with name of the seeder class as first parameter.
 ```
-php seeder OrderSeeder
+php seeder Order
 ```
 
 ## Configuration
@@ -108,6 +108,19 @@ Index of array represents the field in the database.
 For example: [ "fist_name" => "John" ]
 
 ## Versioning
+Version 1.0.1:
+ Database: 
+    * E-mail address field changed to 254 characters. 
+    * Added unique on e-mail address and order_id + ean.
+ Code:
+    * Model::$db changed to static. To prevent opening a new database connection for every model.
+    * Model $_table moved to constructor.
+    * Using array_keys() and array_values() instead of foreach in Model insert() method.
+    * Added new Validator class with date validation method.
+    * Added date validation in Home controller.
+    * Added default option in Request::getParam.
+    * Added type hinting.
+
 Version 1.0.0 - The first commit of application
 
 ## Screenshots

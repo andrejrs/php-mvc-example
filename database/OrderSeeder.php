@@ -39,21 +39,21 @@ class OrderSeeder implements Seeder {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function run() {
+    public function run(): void {
 
         $this->getCustomersArray();
 
-        $this->insertOrders(31, "2018-01-01");
+        $this->insertOrders(31, "2018-02-01");
 
-        $this->insertOrders(4, "2018-01-03");
+        $this->insertOrders(4, "2018-02-03");
 
-        $this->insertOrders(3, "2018-01-08");
+        $this->insertOrders(3, "2018-02-08");
 
-        $this->insertOrders(6, "2018-01-10");
+        $this->insertOrders(6, "2018-02-10");
 
-        $this->insertOrders(4, "2018-01-05");
+        $this->insertOrders(4, "2018-02-05");
 
-        $this->insertOrders(6, "2018-01-16");
+        $this->insertOrders(6, "2018-02-16");
 
         echo "Done \n";
     }
@@ -68,7 +68,7 @@ class OrderSeeder implements Seeder {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function insertOrders($num, $date) {
+    private function insertOrders(int $num, string $date): void {
 
 
         for ($index = 0; $index < $num; $index++) {
@@ -95,7 +95,7 @@ class OrderSeeder implements Seeder {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function insertItems($order_id, $num) {
+    private function insertItems(int $order_id, int $num): void {
 
         for ($index = 0; $index < $num; $index++) {
 
@@ -116,7 +116,7 @@ class OrderSeeder implements Seeder {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function getRandomCustomer() {
+    private function getRandomCustomer(): int {
         $rand_key = array_rand($this->customers, 1);
         return $this->customers[$rand_key];
     }
@@ -128,7 +128,7 @@ class OrderSeeder implements Seeder {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    private function getCustomersArray() {
+    private function getCustomersArray(): void {
 
         $mdlCustomer = new \App\Models\Customer();
         $rows = $mdlCustomer->getAll();

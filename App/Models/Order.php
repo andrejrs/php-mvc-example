@@ -20,12 +20,16 @@ use Core\Model;
 class Order extends Model {
 
     /**
-     * The database table name.
-     * [Variable from the Model class\
+     * The model construct
      *
-     * @var string
      */
-    protected $_table = "orders";
+    public function __construct() {
+
+        /**
+         * The database table name.
+         */
+        parent::__construct("orders");
+    }
 
     /**
      * Method getting all records from database.
@@ -35,7 +39,7 @@ class Order extends Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getAll() {
+    public function getAll(): iterable {
 
         return $this->DB()
                         ->query('SELECT * FROM orders LIMIT 1')
@@ -49,7 +53,7 @@ class Order extends Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getLastTen() {
+    public function getLastTen(): iterable {
 
         return $this->DB()
                         ->query('SELECT o.*, c.first_name, c.last_name, '

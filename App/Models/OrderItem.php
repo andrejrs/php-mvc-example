@@ -25,12 +25,16 @@ use Core\Model;
 class OrderItem extends Model {
 
     /**
-     * The database table name.
-     * [Variable from the Model class\
+     * The model construct
      *
-     * @var string
      */
-    protected $_table = "order_item";
+    public function __construct() {
+
+        /**
+         * The database table name.
+         */
+        parent::__construct("order_item");
+    }
 
     /**
      * Method getting all records from database.
@@ -40,7 +44,7 @@ class OrderItem extends Model {
      * @access  public
      * @since   Method available since Release 1.0.0
      */
-    public function getAll() {
+    public function getAll(): iterable {
 
         return $this->DB()
                         ->query('SELECT * FROM order_item LIMIT 1')
