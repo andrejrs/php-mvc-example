@@ -111,7 +111,7 @@ For example: [ "fist_name" => "John" ]
 ### Version 1.0.1:
 Database: 
 * E-mail address field changed to 254 characters. 
-* Added unique on e-mail address and order_id + ean.
+* Added unique index on e-mail address and order_id + ean.
 
 Code:
 * Model::$db changed to static. To prevent opening a new database connection for every model.
