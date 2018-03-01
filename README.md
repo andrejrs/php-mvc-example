@@ -120,7 +120,7 @@ Code:
 * Added new Validator class with date validation method.
 * Added date validation in Statistic model.
 * Added default option in Request::getParam.
-* Added type hinting.
+* Added type hints.
 
 ### Version 1.0.0 - The first commit of application
 
