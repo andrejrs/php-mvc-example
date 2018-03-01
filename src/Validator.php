@@ -27,8 +27,6 @@ class Validator {
 
     /**
      * Dates validation.
-     *
-     * The method throws Exception if one of the dates is not valid.
      * 
      * @param array $dates A array of string representation of dates.
      * @param string $format The format that the passed in string. The same letters as for the date() can be used.
